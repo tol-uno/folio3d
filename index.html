@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Folio3D</title>
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+
+            body {
+                background: rgb(196,75,230);
+                background: linear-gradient(141deg, rgba(196,75,230,1) 0%, rgba(116,36,187,1) 100%);                 cursor: url("Images/cursor128.png"), auto;
+
+                margin:0
+            }
+
+            section {
+                margin: 0;
+                height: 100vh;
+                
+            }
+
+
+            img {
+                position: relative;
+                margin-top: 20vh;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50%;
+            }
+
+            p {
+                position: absolute;
+                margin-top: 5vh;
+                left: 50%;
+                transform: translateX(-50%);
+
+                color: white;
+                font-family: Helvetica, sans-serif;
+                font-size: 1vw;
+            }
+
+        </style>
+
+	    <script>
+            function remove() {
+                document.getElementById("eggs").remove();
+            }
+        </script>
+        
+    </head>
+    <body>
+        <section onClick="parent.open('https://www.masonpowers.com/')">
+            <img src="Folio3D Logo White.png">
+            <p>Home Of Big Cursor</p>
+        </section>
+    </body>
+</html>
