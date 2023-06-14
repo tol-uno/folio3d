@@ -1,57 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Folio3D</title>
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <style>
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!-- <script src="components/pinch-moveable.js"></script> -->
+    <!-- <script src="components/debug-text.js"></script> -->
+    <!-- <script src="components/point-to-teleport.js"></script> -->
+    <script src="components/pressable.js"></script> <!-- could be replaced with someone elses component on github -->
+    
 
-            body {
-                background: rgb(196,75,230);
-                background: linear-gradient(141deg, rgba(196,75,230,1) 0%, rgba(116,36,187,1) 100%);                 
-		cursor: url("cursor128.png"), auto;
+</head>
+<body>
 
-                margin:0
-            }
+    <!-- <a-scene fog="type: linear; color: #FFF; near: 2; far: 60;"> -->
+    <a-scene shadow="autoUpdate: true; type: pcfsoft" renderer="
+    antialias: true; 
+    colorManagement: true;
+    sortObjects: true;
+    physicallyCorrectLights: true;
+    toneMapping: ACESFilmic;
+    exposure: 1;
+    " >
 
-            section {
-                margin: 0;
-                height: 100vh;
-                
-            }
+        <a-assets>
+            <a-asset-item id="bag" src="https://cdn.jsdelivr.net/gh/tol-uno/3D-assets@main/poly.glb"></a-asset-item>
+            <a-asset-item id="duck" src="https://cdn.jsdelivr.net/gh/tol-uno/3D-assets@main/DuckTex.glb"></a-asset-item>
+            <a-asset-item id="environment" src="assets/GalleryEnvironment_v1.glb"></a-asset-item>
+            <a-asset-item id="shoes" src="assets/shoes.glb"></a-asset-item>
+            <a-asset-item id="monkey" src="assets/monkey.glb"></a-asset-item>
+            <a-asset-item id="eva" src="assets/eva.glb"></a-asset-item>
+            <a-asset-item id="truck" src="assets/truck.glb"></a-asset-item>
+            <img id="sky" src="assets/sky.jpg">
+            <img id="painting" src="assets/painting.jpg">
+            <audio id="sound" src="assets/sound.wav"></audio>
 
+        </a-assets>
+    
+        <a-camera></a-camera>
 
-            img {
-                position: relative;
-                margin-top: 20vh;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 50%;
-            }
+        <a-entity id="leftHand" hand-tracking-controls="hand: left; modelStyle: dots; modelColor: #b4b5ad" point-to-teleport></a-entity>
+        <a-entity id="rightHand" hand-tracking-controls="hand: right; modelStyle: dots; modelColor: #b4b5ad"></a-entity>
 
-            p {
-                position: absolute;
-                margin-top: 5vh;
-                left: 50%;
-                transform: translateX(-50%);
+    <!-- 
+        <a-text id="text1" position="1 1.6 -.5" rotation="0 -90 0" value="text1" color="#1b1b19" width="2" debug-text></a-text>
+        <a-text id="text2" position="1 1.3 -.5" rotation="0 -90 0" value="text2" color="#1b1b19" width="2" debug-text></a-text>
+        <a-text id="text3" position="1 1 -.5" rotation="0 -90 0" value="text3" color="#1b1b19" width="2" debug-text></a-text>
+        <a-text id="theftText" position="2.5 2.6 -9.4" rotation="0 -24 0" color="red" width="5" wrap-count="14" align="center" value="INTELLECTUAL PROPERTY THEFT ZONE"></a-text>
 
-                color: white;
-                font-family: Helvetica, sans-serif;
-                font-size: 1vw;
-            }
+        <a-entity position="0 0.141 -.4" rotation="0 -60 0" gltf-model="#bag" shadow="cast: true"></a-entity>
+        <a-entity position="0 0 0" scale="0.01 0.01 0.01" gltf-model="#duck" shadow="cast: true"></a-entity>
+    -->
+        <a-entity position="-1.5 0 -1.7" scale="1 1 1" gltf-model="#environment" shadow="receive: true; cast: true"></a-entity>
 
-        </style>
-
-	<script>
-
-        </script>
+    <!-- 
+        <a-box
+            id="colored_box" position="-1 1 -0.5"
+            depth="0.2" height="0.2" width="0.2"
+            color="gray" shadow="cast: true" pinch-moveable
+        ></a-box> 
         
-    </head>
-    <body>
-        <section onClick="parent.open('https://www.masonpowers.com/')">
-            <img src="Folio3D Logo White.png">
-            <p>Home Of Big Cursor</p>
-        </section>
-    </body>
+
+            <a-entity
+            id="boxGeometry"
+            position="0 1.2 -.5"
+            rotation="45 45 0"
+            geometry="primitive: box; height: 0.12; width: 0.12; depth: 0.12"
+            material="color: #ff4b5c"
+            pressable
+        ></a-entity>
+
+
+        <a-box position="0.5 .5 1" depth="0.5" height="1" width="0.5" color="#0f1014" shadow="cast: true"></a-box>
+        <a-entity gltf-model="#shoes" position="0.54 1 0.96" rotation="0 -134 0" scale="0.0012 0.0012 0.0012" shadow="cast: true"></a-entity>
+        <a-entity gltf-model="#monkey" position="-1.2 3.2 -8" rotation="0 110 0" scale="8 8 8" shadow="cast: true; receive: true"></a-entity>
+        <a-entity gltf-model="#eva" position="2.1 0.65 -6" rotation="0 90 90" scale="3 3 3" shadow="cast: false"></a-entity>
+        <a-entity gltf-model="#truck" position="8.5 1.29 0.2" rotation="0 -128 0" scale="0.008 0.008 0.008" shadow="cast: true"></a-entity>
+
+
+        <a-sound src="#sound" autoplay="true" position="-2 1 2" volume="1"></a-sound>
+        <a-image src="#painting" width="3.124" height="2" position="-3 1.5 0" rotation="0 -90 0"></a-image>
+
+    -->
+        <a-light type="directional" light="
+            intensity: 2; 
+            castShadow: true; 
+            shadowBias: -0.001; 
+            shadowMapHeight: 2048; 
+            shadowMapWidth: 2048; 
+            color: #fffbf0" 
+        position="0.548 3.336 0.595" intensity="3" shdadow-camera-automatic="#objects"></a-light>
+        
+        
+        
+
+        <!-- <a-entity light="type: point; intensity: 2; distance: 30; decay: 1; castShadow:true; shadowBias: -0.002" position="0 4 0"></a-entity> -->
+        <!-- <a-entity light="type: point; intensity: 0.8; distance: 90; decay: 2" position="0 7 7"></a-entity> -->
+        <a-entity light="type: ambient; color: #e7f6ff; intensity: 1;"></a-entity>
+
+        <a-sky src="#sky"></a-sky>
+        <!-- <a-sky color="#808080"></a-sky> -->
+        
+    
+    </a-scene>
+
+</body>
 </html>
